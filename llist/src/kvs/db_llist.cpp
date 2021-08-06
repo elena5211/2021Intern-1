@@ -19,25 +19,34 @@ Node::Node(char* ikey, char* ivalue, kvs_key_t iklen, kvs_value_t ivlen)
 
 Node::~Node()
 {
-    delete[] key;
-    delete[] value;
+    if(key)
+        delete[] key;
+    if(value)
+        delete[] value;
 }
 
 Node* root;
 
-//node: 들어갈 Node
 int InsertNode(Node* node, uint64_t hash)
 {
     Node* step = root;
     Node* prev = root;
 
-    //다음 위치에 넣으면 되도록 setting
     while (hash > step->hash)
     {
         prev = step;
         step = step->right;
         if(step==NULL)
             break;
+        if(hash == step->hash)
+        {
+            step->left->right = node;
+            node->left = step->left;
+            node->right = step->right;
+            step->right->left = node;
+            delete step;
+            return 0;
+        }
     }
     step = prev;
 

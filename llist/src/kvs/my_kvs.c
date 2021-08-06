@@ -27,7 +27,16 @@ int my_kvs_init (struct my_kvs **my_kvs) {
 
 int my_kvs_destroy (struct my_kvs *my_kvs) {
 	free(my_kvs);
+	
+	while(root->right!=NULL)
+	{
+		Node* temp = root->right;
+		delete root;
+		root = temp;
+	}
+	
 	delete root;
+
 	return 0;
 }
 

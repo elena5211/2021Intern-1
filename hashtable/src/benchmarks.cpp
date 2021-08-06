@@ -18,6 +18,7 @@ using namespace std;
 #define DELETE_OP 3
 
 bool verify;
+int num_ios = 10;
 
 void usage (char *program)
 {
@@ -169,7 +170,6 @@ void  datalab_kvs_wrapper_set_env (struct datalab_kvs_wrapper *wrapper, struct m
 }
 
 int main (int argc, char *argv[]) {
-	int num_ios = 10;
 	int op_type = 1;
 	kvs_key_t klen = 16;
 	uint32_t vlen = 4096;

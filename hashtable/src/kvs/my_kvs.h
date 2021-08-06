@@ -2,7 +2,32 @@
 #define __MY_KVS_H__
 
 #include "datalab_store.h"
+class Node
+{
+    public:
+    char* key;
+    kvs_key_t klen;
+    char* value;
+    kvs_value_t vlen;
+    uint64_t key_hash;
+    uint64_t value_hash;
+	Node* right;
+    Node(const char* ikey, const char* ivalue, kvs_key_t iklen, kvs_value_t ivlen, uint64_t ikey_hash, uint64_t ivalue_hash);
+	Node(char* ikey, char* ivalue, kvs_key_t iklen, kvs_value_t ivlen);
+    ~Node();
+};
 
+class Table
+{
+    public:
+    Node** BucketArray;
+
+    Table();
+	~Table();
+    int InsertNode(Node* Node);
+    int DeleteNode(char* key, uint64_t key_hash);
+    int GetNode(char* key, char* result, uint64_t key_hash);
+};
 
 struct my_kvs {
 	struct my_kvs *my_kvs;

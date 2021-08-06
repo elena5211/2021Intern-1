@@ -22,7 +22,6 @@ class Node
         Node* left;
         Node* right;
     
-    public:
         Node(char* ikey, char* ivalue, kvs_key_t iklen, kvs_value_t ivlen);
         ~Node();
 };
